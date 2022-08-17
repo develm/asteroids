@@ -25,8 +25,9 @@ impl SpriteSheet {
     }
 }
 
+#[derive(Clone, Default, Debug)]
 pub struct AtlasManager {
-    pub texture_atlas: TextureAtlas,
+    pub texture_atlas: Handle<TextureAtlas>,
     pub texture_index: HashMap<String, i32>,
 }
 
@@ -34,7 +35,9 @@ pub struct AssetManagerPlugin;
 
 impl Plugin for AssetManagerPlugin {
     fn build(&self, app: &mut App) {
-        app.add_startup_system(AssetManagerPlugin::load_assets);
+        app
+            .init_resource::<AtlasManager>()
+            .add_startup_system(AssetManagerPlugin::load_assets);
     }
 }
 
@@ -42,9 +45,10 @@ impl AssetManagerPlugin {
     fn load_assets(
         mut commands: Commands,
         asset_server: Res<AssetServer>,
+        mut texture_atlases: ResMut<Assets<TextureAtlas>>
     ) {
         let sprite_sheet = SpriteSheet::load();
-        let texture_handle = asset_server.load("");
+        let texture_handle = asset_server.load("atlas.png");
 
 
         let mut texture_atlas = TextureAtlas::new_empty(texture_handle, Vec2::new(sprite_sheet.width, sprite_sheet.height));
@@ -59,8 +63,11 @@ impl AssetManagerPlugin {
                     max: Vec2::new(w, h),
                 });
         }
+
+
+        let handle= texture_atlases.add(texture_atlas);
         commands.insert_resource(AtlasManager{
-            texture_atlas,
+            texture_atlas: handle,
             texture_index,
         });
     }
