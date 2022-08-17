@@ -1,10 +1,11 @@
 mod asset_manager;
 mod components;
+mod player_input;
 
 use bevy::prelude::*;
-use bevy::window::WindowMode;
 use crate::asset_manager::{AssetManagerPlugin, AtlasManager};
 use crate::components::Player;
+use crate::player_input::*;
 
 fn main() {
     App::new()
@@ -17,6 +18,7 @@ fn main() {
         .add_plugins(DefaultPlugins)
         .add_plugin(AssetManagerPlugin)
         .add_startup_system(load_game)
+        .add_system(handle_player_input)
         .run();
 }
 
@@ -32,5 +34,8 @@ fn load_game(
             sprite: TextureAtlasSprite::new(*atlas_manager.texture_index.get("spaceship").expect("Could not find texture")),
             ..Default::default()
         })
-        .insert(Player);
+        .insert(Player {
+            movement_speed: 300.0,
+            rotation_speed: f32::to_radians(180.0),
+        });
 }
