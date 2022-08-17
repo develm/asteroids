@@ -1,0 +1,106 @@
+SpriteSheet(
+    width: 299.0,
+    height: 218.0,
+    sprites: [
+        Sprite(
+            name: "asteroid_large",
+            position: (0, 0, 117, 123)
+        ),
+        Sprite(
+            name: "asteroid_half_1",
+            position: (0, 133, 38, 72),
+        ),
+        Sprite(
+            name: "asteroid_half_2",
+            position: (106, 133, 34, 63),
+        ),
+        Sprite(
+            name: "asteroid_half_3",
+            position: (141, 133, 55, 48),
+        ),
+        Sprite(
+            name: "asteroid_quarter_1",
+            position: (203, 81, 39, 49),
+        ),
+        Sprite(
+            name: "asteroid_quater_2",
+            position: (197, 133, 42, 47),
+        ),
+        Sprite(
+            name: "asteroid_small_1",
+            position: (168, 82, 28, 39),
+        ),
+        Sprite(
+            name: "asteroid_small_2",
+            position: (243, 81, 36, 35),
+        ),
+        Sprite(
+            name: "asteroid_small_3",
+            position: (240, 160, 22, 25),
+        ),
+        Sprite(
+            name: "asteroid_small_4",
+            position: (240, 186, 22, 24),
+        ),
+        Sprite(
+            name: "asteroid_small_5",
+            position: (270, 133, 29, 24),
+        ),
+        Sprite(
+            name: "explosion",
+            position: (118, 0, 84, 81),
+        ),
+        Sprite(
+            name: "station",
+            position: (203, 0, 76, 80),
+        ),
+        Sprite(
+            name: "spaceship",
+            position: (39, 133, 66, 71),
+        ),
+        Sprite(
+            name: "circle",
+            position: (118, 82, 49, 49),
+        ),
+        Sprite(
+            name: "boost",
+            position: (141, 182, 53, 30),
+        ),
+        Sprite(
+            name: "star_green",
+            position: (197, 181, 30, 29),
+        ),
+        Sprite(
+            name: "star_purple",
+            position: (240, 133, 29, 26),
+        ),
+        Sprite(
+            name: "gold_nugget_1",
+            position: (270, 158, 18, 18),
+        ),
+        Sprite(
+            name: "gold_nugget_2",
+            position: (106, 197, 16, 17),
+        ),
+        Sprite(
+            name: "power_green",
+            position: (228, 181, 11, 13),
+        ),
+        Sprite(
+            name: "power_purple",
+            position: (228, 195, 11, 13),
+        ),
+        Sprite(
+            name: "smoke_1",
+            position: (264, 178, 16, 15),
+        ),
+        Sprite(
+            name: "smoke_2",
+            position: (285, 178, 14, 15),
+        ),
+        Sprite(
+            name: "smoke_3",
+            position: (273, 196, 19, 16),
+        ),
+    ]
+)
