@@ -1,6 +1,6 @@
 SpriteSheet(
-    width: 299.0,
-    height: 218.0,
+    width: 300.0,
+    height: 220.0,
     sprites: [
         Sprite(
             name: "asteroid_large",

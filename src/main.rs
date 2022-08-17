@@ -23,6 +23,7 @@ fn load_game(
     mut commands: Commands,
     atlas_manager: Res<AtlasManager>,
 ) {
+    commands.spawn_bundle(Camera2dBundle::default());
     commands.spawn()
         .insert_bundle(SpriteSheetBundle {
             texture_atlas: atlas_manager.texture_atlas.clone(),

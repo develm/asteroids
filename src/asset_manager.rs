@@ -58,11 +58,11 @@ impl AssetManagerPlugin {
             texture_atlas.add_texture(
                 Rect {
                     min: Vec2::new(x, y),
-                    max: Vec2::new(w, h),
+                    max: Vec2::new(x+w, y+h),
                 });
         }
 
-
+        println!("Hello");
         let handle = texture_atlases.add(texture_atlas);
         commands.insert_resource(AtlasManager {
             texture_atlas: handle,
