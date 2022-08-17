@@ -30,7 +30,6 @@ fn load_game(
             transform: Transform::from_translation(Vec3::new(0.0, 220.0, 0.0)),
             sprite: TextureAtlasSprite::new(*atlas_manager.texture_index.get("spaceship").expect("Could not find texture")),
             ..Default::default()
-
         })
         .insert(Player);
 }
