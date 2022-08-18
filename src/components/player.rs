@@ -9,7 +9,7 @@ impl Player {
             .insert_bundle(SpriteSheetBundle {
                 texture_atlas: atlas_manager.texture_atlas.clone(),
                 transform: Transform::from_translation(spawn_point).with_scale(SCALE),
-                sprite: TextureAtlasSprite::new(*atlas_manager.texture_index.get("spaceship").expect("Could not find texture index")),
+                sprite: TextureAtlasSprite::new(atlas_manager.find_index("spaceship")),
                 ..Default::default()
             })
             .insert(Player)

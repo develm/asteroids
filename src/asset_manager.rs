@@ -28,7 +28,13 @@ impl SpriteSheet {
 #[derive(Clone, Default, Debug)]
 pub struct AtlasManager {
     pub texture_atlas: Handle<TextureAtlas>,
-    pub texture_index: HashMap<String, usize>,
+    texture_index: HashMap<String, usize>,
+}
+
+impl AtlasManager {
+    pub fn find_index(&self, key: &str) -> usize {
+        *self.texture_index.get(key).expect("Could not find texture index")
+    }
 }
 
 pub struct AssetManagerPlugin;
