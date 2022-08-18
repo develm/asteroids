@@ -1,12 +1,13 @@
 mod asset_manager;
 mod components;
 mod player_input;
-mod util;
+mod wrap;
 
 use bevy::prelude::*;
 use crate::asset_manager::{AssetManagerPlugin, AtlasManager};
 use crate::components::Player;
 use crate::player_input::*;
+use crate::wrap::wrap_window;
 
 fn main() {
     App::new()
@@ -20,6 +21,7 @@ fn main() {
         .add_plugin(AssetManagerPlugin)
         .add_startup_system(load_game)
         .add_system(player_movement)
+        .add_system(wrap_window)
         .run();
 }
 
