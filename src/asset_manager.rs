@@ -1,9 +1,9 @@
 use std::fs::File;
 use ron::de::from_reader;
-use bevy::prelude::*;
 use bevy::sprite::Rect;
 use bevy::utils::HashMap;
 use serde::Deserialize;
+use crate::prelude::*;
 
 #[derive(Clone, Deserialize, Debug)]
 struct Sprite {

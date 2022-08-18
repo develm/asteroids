@@ -1,12 +1,11 @@
-use bevy::prelude::*;
-use crate::Player;
+use crate::prelude::*;
 
 pub fn player_movement(
     key: Res<Input<KeyCode>>,
     time: Res<Time>,
-    mut query: Query<(&Player, &mut Transform)>,
+    mut query: Query<(&Player, &Movement, &mut Transform)>,
 ) {
-    let (player, mut transform) = query.single_mut();
+    let (_, movement, mut transform) = query.single_mut();
     // Handle Rotation
     let mut rotation_factor = 0.0;
     if key.pressed(KeyCode::Left) {
@@ -21,10 +20,10 @@ pub fn player_movement(
         movement_factor += 1.0;
     }
 
-    transform.rotate_z(rotation_factor * player.rotation_speed * time.delta_seconds());
+    transform.rotate_z(rotation_factor * movement.rotation_speed * time.delta_seconds());
 
     let direction = transform.rotation * -Vec3::X;
-    let distance = movement_factor * player.movement_speed * time.delta_seconds();
+    let distance = movement_factor * movement.movement_speed * time.delta_seconds();
     let translation_delta = direction * distance;
     transform.translation += translation_delta;
 }

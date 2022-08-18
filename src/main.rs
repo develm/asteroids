@@ -3,11 +3,20 @@ mod components;
 mod player_input;
 mod wrap;
 
-use bevy::prelude::*;
-use crate::asset_manager::{AssetManagerPlugin, AtlasManager};
-use crate::components::Player;
-use crate::player_input::*;
-use crate::wrap::wrap_window;
+mod prelude {
+    pub use bevy::prelude::*;
+    pub use crate::components::*;
+    pub use crate::player::*;
+    pub use crate::common::*;
+    pub use crate::wrap::*;
+    pub use crate::player_input::*;
+    pub use crate::asset_manager::*;
+
+    pub const SCALE: Vec3 = Vec3::splat(0.5);
+}
+
+use bevy::window::PresentMode;
+use prelude::*;
 
 fn main() {
     App::new()
@@ -15,6 +24,7 @@ fn main() {
             title: "Asteroids".to_string(),
             width: 1024.0,
             height: 768.0,
+            present_mode: PresentMode::AutoVsync,
             ..Default::default()
         })
         .add_plugins(DefaultPlugins)
@@ -30,15 +40,5 @@ fn load_game(
     atlas_manager: Res<AtlasManager>,
 ) {
     commands.spawn_bundle(Camera2dBundle::default());
-    commands.spawn()
-        .insert_bundle(SpriteSheetBundle {
-            texture_atlas: atlas_manager.texture_atlas.clone(),
-            transform: Transform::from_translation(Vec3::new(0.0, 0.0, 0.0)).with_scale(Vec3::new(0.5, 0.5, 0.5)),
-            sprite: TextureAtlasSprite::new(*atlas_manager.texture_index.get("spaceship").expect("Could not find texture")),
-            ..Default::default()
-        })
-        .insert(Player {
-            movement_speed: 300.0,
-            rotation_speed: f32::to_radians(180.0),
-        });
+    Player::spawn(&mut commands, &atlas_manager, Vec3::ZERO);
 }
