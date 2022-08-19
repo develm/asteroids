@@ -3,9 +3,9 @@ use crate::prelude::*;
 pub fn player_movement(
     key: Res<Input<KeyCode>>,
     time: Res<Time>,
-    mut query: Query<(&Player, &Movement, &mut Transform)>,
+    mut query: Query<(&Movement, &mut Transform), With<Player>>,
 ) {
-    let (_, movement, mut transform) = match query.get_single_mut() {
+    let (movement, mut transform) = match query.get_single_mut() {
         Ok(q) => q,
         Err(_) => return
     };

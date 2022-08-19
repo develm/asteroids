@@ -2,21 +2,24 @@ mod asset_manager;
 mod components;
 mod player_input;
 mod wrap;
+mod asteroid_movement;
 
 mod prelude {
     pub use bevy::prelude::*;
     pub use crate::components::*;
     pub use crate::player::*;
     pub use crate::common::*;
+    pub use crate::asteroid::*;
     pub use crate::wrap::*;
     pub use crate::player_input::*;
     pub use crate::asset_manager::*;
 
-    pub const SCALE: Vec3 = Vec3::splat(0.5);
+    pub const ASSET_SCALING: Vec3 = Vec3::splat(0.5);
 }
 
 use bevy::window::PresentMode;
 use prelude::*;
+use crate::asteroid_movement::auto_move;
 
 fn main() {
     App::new()
@@ -33,6 +36,7 @@ fn main() {
         .add_system(player_movement)
         .add_system(wrap_window)
         .add_system(expend)
+        .add_system(auto_move)
         .run();
 }
 
@@ -42,4 +46,5 @@ fn load_game(
 ) {
     commands.spawn_bundle(Camera2dBundle::default());
     Player::spawn(&mut commands, &atlas_manager, Vec3::ZERO);
+    Asteroid::spawn(&mut commands, &atlas_manager, Vec3::new(-200.0, 200.0, 0.0))
 }

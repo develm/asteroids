@@ -3,10 +3,10 @@ use crate::prelude::*;
 
 pub fn wrap_window(
     windows: ResMut<Windows>,
-    mut query: Query<(&Wrappable, &mut Transform)>,
+    mut query: Query<&mut Transform, With<Wrappable>>,
 ) {
     let window = windows.get_primary().expect("Could not load window information");
-    for (_, mut transform) in query.iter_mut() {
+    for mut transform in query.iter_mut() {
         transform.translation = wrap_coordinates(&transform.translation, window.width(), window.height());
     }
 }
@@ -14,10 +14,10 @@ pub fn wrap_window(
 pub fn expend(
     mut commands: Commands,
     windows: ResMut<Windows>,
-    query: Query<(Entity, &Expendable, &Transform)>,
+    query: Query<(Entity, &Transform), With<Expendable>>,
 ) {
     let window = windows.get_primary().expect("Could not load window information");
-    for (e, _, transform) in query.iter() {
+    for (e, transform) in query.iter() {
         if out_of_bounds(
             &transform.translation,
             window.width(),

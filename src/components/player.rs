@@ -4,14 +4,19 @@ use crate::prelude::*;
 pub struct Player;
 
 impl Player {
-    pub fn spawn(commands: &mut Commands, atlas_manager: &Res<AtlasManager>, spawn_point: Vec3) {
+    pub fn spawn(
+        commands: &mut Commands,
+        atlas_manager: &Res<AtlasManager>,
+        spawn_point: Vec3
+    ) {
         commands.spawn()
-            .insert_bundle(SpriteSheetBundle {
-                texture_atlas: atlas_manager.texture_atlas.clone(),
-                transform: Transform::from_translation(spawn_point).with_scale(SCALE),
-                sprite: TextureAtlasSprite::new(atlas_manager.find_index("spaceship")),
-                ..Default::default()
-            })
+            .insert_bundle(
+                SpriteSheetBundle {
+                    texture_atlas: atlas_manager.texture_atlas.clone(),
+                    transform: Transform::from_translation(spawn_point).with_scale(ASSET_SCALING),
+                    sprite: TextureAtlasSprite::new(atlas_manager.find_index("spaceship")),
+                    ..Default::default()
+                })
             .insert(Player)
             .insert(Wrappable)
             .insert(Movement {
