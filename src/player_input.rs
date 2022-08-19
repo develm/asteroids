@@ -5,7 +5,10 @@ pub fn player_movement(
     time: Res<Time>,
     mut query: Query<(&Player, &Movement, &mut Transform)>,
 ) {
-    let (_, movement, mut transform) = query.single_mut();
+    let (_, movement, mut transform) = match query.get_single_mut() {
+        Ok(q) => q,
+        Err(_) => return
+    };
     // Handle Rotation
     let mut rotation_factor = 0.0;
     if key.pressed(KeyCode::Left) {
