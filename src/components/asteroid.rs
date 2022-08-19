@@ -1,3 +1,5 @@
+use rand::prelude::ThreadRng;
+use rand::Rng;
 use crate::prelude::*;
 
 #[derive(Component)]
@@ -9,6 +11,7 @@ impl Asteroid {
         atlas_manager: &Res<AtlasManager>,
         spawn_point: Vec3
     ) {
+        let mut rng = rand::thread_rng();
         commands.spawn()
             .insert_bundle(
                 SpriteSheetBundle {
@@ -21,11 +24,17 @@ impl Asteroid {
             .insert(Asteroid)
             .insert(Wrappable)
             .insert(AutoMove {
-                direction: Vec3::splat(0.0)
+                direction: random_direction(&mut rng)
             })
             .insert(Movement {
-                movement_speed: 250.0,
+                movement_speed: 150.0,
                 rotation_speed: -f32::to_radians(45.0),
             });
     }
+}
+
+fn random_direction(rng: &mut ThreadRng) -> Vec3 {
+    let x = rng.gen_range(-1.0..1.0) as f32;
+    let y = rng.gen_range(-1.0..1.0) as f32;
+    Vec3::new(x, y, 0.0)
 }

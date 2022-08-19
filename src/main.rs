@@ -2,7 +2,7 @@ mod asset_manager;
 mod components;
 mod player_input;
 mod wrap;
-mod asteroid_movement;
+mod r#move;
 
 mod prelude {
     pub use bevy::prelude::*;
@@ -19,7 +19,7 @@ mod prelude {
 
 use bevy::window::PresentMode;
 use prelude::*;
-use crate::asteroid_movement::auto_move;
+use crate::r#move::auto_move;
 
 fn main() {
     App::new()
@@ -46,5 +46,8 @@ fn load_game(
 ) {
     commands.spawn_bundle(Camera2dBundle::default());
     Player::spawn(&mut commands, &atlas_manager, Vec3::ZERO);
-    Asteroid::spawn(&mut commands, &atlas_manager, Vec3::new(-200.0, 200.0, 0.0))
+    Asteroid::spawn(&mut commands, &atlas_manager, Vec3::new(-200.0, 200.0, 0.0));
+    Asteroid::spawn(&mut commands, &atlas_manager, Vec3::new(-400.0, 700.0, 0.0));
+    Asteroid::spawn(&mut commands, &atlas_manager, Vec3::new(800.0, -300.0, 0.0));
+
 }
