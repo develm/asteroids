@@ -32,6 +32,7 @@ fn main() {
         .add_startup_system(load_game)
         .add_system(player_movement)
         .add_system(wrap_window)
+        .add_system(expend)
         .run();
 }
 

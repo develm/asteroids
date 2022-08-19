@@ -13,6 +13,7 @@ impl Player {
                 ..Default::default()
             })
             .insert(Player)
+            .insert(Wrappable)
             .insert(Movement {
                 movement_speed: 300.0,
                 rotation_speed: f32::to_radians(180.0),
