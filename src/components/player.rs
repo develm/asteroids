@@ -1,7 +1,9 @@
 use crate::prelude::*;
 
 #[derive(Component)]
-pub struct Player;
+pub struct Player {
+    fire_rate: f32,
+}
 
 impl Player {
     pub fn spawn(
@@ -17,11 +19,17 @@ impl Player {
                     sprite: TextureAtlasSprite::new(atlas_manager.find_index("spaceship")),
                     ..Default::default()
                 })
-            .insert(Player)
+            .insert(Player {
+                fire_rate: 10.0
+            })
             .insert(Wrappable)
             .insert(Movement {
                 movement_speed: 300.0,
                 rotation_speed: f32::to_radians(180.0),
             });
+    }
+
+    pub fn fire_rate(&self) -> f32 {
+        1.0 / self.fire_rate
     }
 }
