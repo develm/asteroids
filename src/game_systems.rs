@@ -96,17 +96,18 @@ pub fn destroy_asteroid(
     atlas_manager: Res<AtlasManager>,
     atlases: ResMut<Assets<TextureAtlas>>,
     lasers: Query<(Entity, &Transform), With<Laser>>,
-    asteroids: Query<(Entity, &TextureAtlasSprite, &Transform), With<Asteroid>>,
+    asteroids: Query<(Entity, &Asteroid, &TextureAtlasSprite, &Transform)>,
 ) {
     let atlas = atlases.get(&atlas_manager.texture_atlas).expect("Texture atlas not found");
-    for (le, laser) in lasers.iter() {
-        for (ae, sprite, asteroid) in asteroids.iter() {
+    for (l_entity, laser) in lasers.iter() {
+        for (a_entity, asteroid, sprite, a_position) in asteroids.iter() {
             // sprite size
             let size = atlas.textures.get(sprite.index).expect("Texture size not found");
-            if in_bounds(laser.translation, asteroid.translation, size.width(), size.height()) {
+            if in_bounds(laser.translation, a_position.translation, size.width(), size.height()) {
                 // despawn asteroid and laser
-                commands.entity(le).despawn();
-                commands.entity(ae).despawn();
+                commands.entity(l_entity).despawn();
+                commands.entity(a_entity).despawn();
+                asteroid.split(&mut commands, &atlas_manager, a_position.translation);
             }
 
         }
@@ -129,6 +130,7 @@ pub fn destroy_player (
         let size = atlas.textures.get(sprite.index).expect("Texture size not found");
         if in_bounds(player.translation, asteroid.translation, size.width(), size.height()) {
             commands.entity(pe).despawn();
+            Player::spawn(&mut commands, &atlas_manager, Vec3::ZERO);
         }
     }
 }

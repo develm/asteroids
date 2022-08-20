@@ -3,7 +3,9 @@ use rand::Rng;
 use crate::prelude::*;
 
 #[derive(Component)]
-pub struct Asteroid;
+pub struct Asteroid {
+    size: i32
+}
 
 impl Asteroid {
     pub fn spawn(
@@ -21,7 +23,9 @@ impl Asteroid {
                     ..Default::default()
                 }
             )
-            .insert(Asteroid)
+            .insert(Asteroid {
+                size: 3
+            })
             .insert(Wrappable)
             .insert(AutoMove {
                 direction: random_direction(&mut rng)
@@ -30,6 +34,40 @@ impl Asteroid {
                 movement_speed: 150.0,
                 rotation_speed: -f32::to_radians(45.0),
             });
+    }
+
+    pub fn split (
+        &self,
+        commands: &mut Commands,
+        atlas_manager: &Res<AtlasManager>,
+        spawn_point: Vec3
+    ) {
+        if self.size <= 0 {
+            return;
+        }
+        let mut rng = rand::thread_rng();
+        for _ in 0..2 {
+            commands.spawn()
+                .insert_bundle(
+                    SpriteSheetBundle {
+                        texture_atlas: atlas_manager.texture_atlas.clone(),
+                        transform: Transform::from_translation(spawn_point).with_scale(Vec3::splat(0.7 * (self.size - 1) as f32)),
+                        sprite: TextureAtlasSprite::new(atlas_manager.find_index("asteroid_half_1")),
+                        ..Default::default()
+                    }
+                )
+                .insert(Asteroid {
+                    size: self.size - 1
+                })
+                .insert(Wrappable)
+                .insert(AutoMove {
+                    direction: random_direction(&mut rng)
+                })
+                .insert(Movement {
+                    movement_speed: 150.0,
+                    rotation_speed: -f32::to_radians(45.0),
+                });
+        }
     }
 }
 
