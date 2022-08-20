@@ -48,14 +48,14 @@ pub fn player_action (
     atlas_manager: Res<AtlasManager>,
     time: Res<Time>,
     mut elapsed: Local<f32>,
-    query: Query<(&Player, &Transform),>,
+    query: Query<(&Player, &Transform)>,
 ) {
     let (player, position) = match query.get_single() {
         Ok(q) => q,
         Err(_) => return
     };
     *elapsed += time.delta_seconds();
-    if key.pressed(KeyCode::Space) && *elapsed > player.fire_rate() {
+    if key.just_pressed(KeyCode::Space) && *elapsed > player.fire_rate() {
         let direction = position.rotation * -Vec3::X;
         let position = position.translation + (Vec3::new(20.0, 20.0, -1.0) * direction);
         Laser::spawn(&mut commands, atlas_manager, position, direction);
@@ -69,7 +69,7 @@ pub fn wrap_window(
 ) {
     let window = windows.get_primary().expect("Could not load window information");
     for mut transform in query.iter_mut() {
-        transform.translation = wrap_coordinates(&transform.translation, window.width(), window.height());
+        transform.translation = wrap_coordinates(transform.translation, window.width(), window.height());
     }
 }
 
@@ -81,12 +81,54 @@ pub fn expend(
     let window = windows.get_primary().expect("Could not load window information");
     for (e, transform) in query.iter() {
         if out_of_bounds(
-            &transform.translation,
+            transform.translation,
             window.width(),
             window.height(),
             50.0,
         ) {
             commands.entity(e).despawn();
+        }
+    }
+}
+
+pub fn destroy_asteroid(
+    mut commands: Commands,
+    atlas_manager: Res<AtlasManager>,
+    atlases: ResMut<Assets<TextureAtlas>>,
+    lasers: Query<(Entity, &Transform), With<Laser>>,
+    asteroids: Query<(Entity, &TextureAtlasSprite, &Transform), With<Asteroid>>,
+) {
+    let atlas = atlases.get(&atlas_manager.texture_atlas).expect("Texture atlas not found");
+    for (le, laser) in lasers.iter() {
+        for (ae, sprite, asteroid) in asteroids.iter() {
+            // sprite size
+            let size = atlas.textures.get(sprite.index).expect("Texture size not found");
+            if in_bounds(laser.translation, asteroid.translation, size.width(), size.height()) {
+                // despawn asteroid and laser
+                commands.entity(le).despawn();
+                commands.entity(ae).despawn();
+            }
+
+        }
+    }
+}
+
+pub fn destroy_player (
+    mut commands: Commands,
+    atlas_manager: Res<AtlasManager>,
+    atlases: ResMut<Assets<TextureAtlas>>,
+    player: Query<(Entity, &Transform), With<Player>>,
+    asteroids: Query<(&TextureAtlasSprite, &Transform), With<Asteroid>>,
+) {
+    let (pe, player) = match player.get_single() {
+        Ok(q) => q,
+        Err(_) => return
+    };
+    let atlas = atlases.get(&atlas_manager.texture_atlas).expect("Texture atlas not found");
+    for (sprite, asteroid) in asteroids.iter() {
+        let size = atlas.textures.get(sprite.index).expect("Texture size not found");
+        if in_bounds(player.translation, asteroid.translation, size.width(), size.height()) {
+            commands.entity(pe).despawn();
         }
     }
 }

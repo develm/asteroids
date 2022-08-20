@@ -36,6 +36,8 @@ fn main() {
         .add_system(game_systems::expend)
         .add_system(game_systems::auto_move)
         .add_system(game_systems::player_action)
+        .add_system(game_systems::destroy_asteroid)
+        .add_system(game_systems::destroy_player)
         .run();
 }
 
