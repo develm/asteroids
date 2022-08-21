@@ -1,8 +1,10 @@
 use std::fs::File;
-use ron::de::from_reader;
+
 use bevy::sprite::Rect;
 use bevy::utils::HashMap;
+use ron::de::from_reader;
 use serde::Deserialize;
+
 use crate::prelude::*;
 
 #[derive(Clone, Deserialize, Debug)]

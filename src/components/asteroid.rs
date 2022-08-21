@@ -7,14 +7,14 @@ const INITIAL_SIZE: i32 = 3;
 
 #[derive(Component)]
 pub struct Asteroid {
-    size: i32
+    size: i32,
 }
 
 impl Asteroid {
     pub fn spawn(
         commands: &mut Commands,
         atlas_manager: &Res<AtlasManager>,
-        spawn_point: Vec3
+        spawn_point: Vec3,
     ) {
         let mut rng = rand::thread_rng();
         commands.spawn()
@@ -39,11 +39,11 @@ impl Asteroid {
             });
     }
 
-    pub fn split (
+    pub fn split(
         &self,
         commands: &mut Commands,
         atlas_manager: &Res<AtlasManager>,
-        spawn_point: Vec3
+        spawn_point: Vec3,
     ) {
         if self.size <= 0 {
             return;

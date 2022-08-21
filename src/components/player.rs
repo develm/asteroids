@@ -9,7 +9,7 @@ impl Player {
     pub fn spawn(
         commands: &mut Commands,
         atlas_manager: &Res<AtlasManager>,
-        spawn_point: Vec3
+        spawn_point: Vec3,
     ) {
         commands.spawn()
             .insert_bundle(

@@ -42,7 +42,7 @@ pub fn player_movement(
     transform.translation += translation_delta;
 }
 
-pub fn player_action (
+pub fn player_action(
     mut commands: Commands,
     key: Res<Input<KeyCode>>,
     atlas_manager: Res<AtlasManager>,
@@ -109,12 +109,11 @@ pub fn destroy_asteroid(
                 commands.entity(l_entity).despawn();
                 commands.entity(a_entity).despawn();
             }
-
         }
     }
 }
 
-pub fn destroy_player (
+pub fn destroy_player(
     mut commands: Commands,
     atlas_manager: Res<AtlasManager>,
     atlases: ResMut<Assets<TextureAtlas>>,

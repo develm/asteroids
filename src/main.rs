@@ -1,3 +1,7 @@
+use bevy::window::PresentMode;
+
+use prelude::*;
+
 mod asset_manager;
 mod components;
 mod game_systems;
@@ -5,18 +9,16 @@ mod util;
 
 mod prelude {
     pub use bevy::prelude::*;
+
+    pub use crate::asset_manager::*;
+    pub use crate::asteroid::*;
+    pub use crate::common::*;
     pub use crate::components::*;
     pub use crate::player::*;
-    pub use crate::common::*;
-    pub use crate::asteroid::*;
-    pub use crate::asset_manager::*;
     pub use crate::util::*;
 
     pub const ASSET_SCALING: Vec3 = Vec3::splat(0.5);
 }
-
-use bevy::window::PresentMode;
-use prelude::*;
 
 fn main() {
     App::new()
@@ -50,5 +52,4 @@ fn load_game(
     Asteroid::spawn(&mut commands, &atlas_manager, Vec3::new(-200.0, 200.0, 99.0));
     Asteroid::spawn(&mut commands, &atlas_manager, Vec3::new(-400.0, 700.0, 99.0));
     Asteroid::spawn(&mut commands, &atlas_manager, Vec3::new(800.0, -300.0, 99.0));
-
 }

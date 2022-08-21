@@ -1,4 +1,3 @@
-
 use crate::prelude::*;
 
 #[derive(Component)]
@@ -10,7 +9,7 @@ impl Laser {
         commands: &mut Commands,
         atlas_manager: Res<AtlasManager>,
         spawn_point: Vec3,
-        direction: Vec3
+        direction: Vec3,
     ) {
         commands.spawn()
             .insert_bundle(
