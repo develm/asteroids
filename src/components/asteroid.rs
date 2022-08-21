@@ -1,6 +1,9 @@
-use rand::prelude::ThreadRng;
+use rand::prelude::{SliceRandom, ThreadRng};
 use rand::Rng;
+
 use crate::prelude::*;
+
+const INITIAL_SIZE: i32 = 3;
 
 #[derive(Component)]
 pub struct Asteroid {
@@ -18,13 +21,13 @@ impl Asteroid {
             .insert_bundle(
                 SpriteSheetBundle {
                     texture_atlas: atlas_manager.texture_atlas.clone(),
-                    transform: Transform::from_translation(spawn_point).with_scale(Vec3::splat(1.5)),
+                    transform: Transform::from_translation(spawn_point).with_scale(Vec3::splat(INITIAL_SIZE as f32 / 2.0)),
                     sprite: TextureAtlasSprite::new(atlas_manager.find_index("asteroid_large")),
                     ..Default::default()
                 }
             )
             .insert(Asteroid {
-                size: 3
+                size: INITIAL_SIZE
             })
             .insert(Wrappable)
             .insert(AutoMove {
@@ -51,8 +54,8 @@ impl Asteroid {
                 .insert_bundle(
                     SpriteSheetBundle {
                         texture_atlas: atlas_manager.texture_atlas.clone(),
-                        transform: Transform::from_translation(spawn_point).with_scale(Vec3::splat(0.7 * (self.size - 1) as f32)),
-                        sprite: TextureAtlasSprite::new(atlas_manager.find_index("asteroid_half_1")),
+                        transform: Transform::from_translation(spawn_point.clone()).with_scale(Vec3::splat(self.size as f32 / 2.0)),
+                        sprite: TextureAtlasSprite::new(atlas_manager.find_index("asteroid_half_3")),
                         ..Default::default()
                     }
                 )

@@ -4,7 +4,7 @@ SpriteSheet(
     sprites: [
         Sprite(
             name: "asteroid_large",
-            position: (0, 0, 117, 123)
+            position: (0, 0, 117, 123),
         ),
         Sprite(
             name: "asteroid_half_1",
@@ -19,20 +19,20 @@ SpriteSheet(
             position: (141, 133, 55, 48),
         ),
         Sprite(
-            name: "asteroid_quarter_1",
+            name: "asteroid_half_4",
             position: (203, 81, 39, 49),
         ),
         Sprite(
-            name: "asteroid_quater_2",
+            name: "asteroid_half_5",
             position: (197, 133, 42, 47),
+        ),
+        Sprite(
+            name: "asteroid_half_6",
+            position: (243, 81, 36, 35),
         ),
         Sprite(
             name: "asteroid_small_1",
             position: (168, 82, 28, 39),
-        ),
-        Sprite(
-            name: "asteroid_small_2",
-            position: (243, 81, 36, 35),
         ),
         Sprite(
             name: "asteroid_small_3",
