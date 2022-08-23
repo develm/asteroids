@@ -94,6 +94,7 @@ pub fn expend(
 pub fn destroy_asteroid(
     mut commands: Commands,
     atlas_manager: Res<AtlasManager>,
+    asteroid_manager: Res<AsteroidManager>,
     atlases: ResMut<Assets<TextureAtlas>>,
     lasers: Query<(Entity, &Transform), With<Laser>>,
     asteroids: Query<(Entity, &Asteroid, &TextureAtlasSprite, &Transform)>,
@@ -105,7 +106,7 @@ pub fn destroy_asteroid(
             let size = atlas.textures.get(sprite.index).expect("Texture size not found");
             if in_bounds(laser.translation, a_position.translation, size.width(), size.height()) {
                 // despawn asteroid and laser, spawn two smaller asteroids
-                asteroid.split(&mut commands, &atlas_manager, a_position.translation);
+                asteroid.split(&mut commands, &atlas_manager, &asteroid_manager, a_position.translation);
                 commands.entity(l_entity).despawn();
                 commands.entity(a_entity).despawn();
             }
@@ -128,11 +129,6 @@ pub fn destroy_player(
     for (sprite, asteroid) in asteroids.iter() {
         let size = atlas.textures.get(sprite.index).expect("Texture size not found");
         if in_bounds(player.translation, asteroid.translation, size.width(), size.height()) {
-            println!("DESTROYED player: ({},{}), asteroid: ({},{})",
-                     player.translation.x,
-                     player.translation.y,
-                     asteroid.translation.x,
-                     asteroid.translation.y);
             commands.entity(pe).despawn();
             Player::spawn(&mut commands, &atlas_manager, Vec3::ZERO);
         }

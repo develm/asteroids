@@ -35,15 +35,15 @@ SpriteSheet(
             position: (168, 82, 28, 39),
         ),
         Sprite(
-            name: "asteroid_small_3",
+            name: "asteroid_small_2",
             position: (240, 160, 22, 25),
         ),
         Sprite(
-            name: "asteroid_small_4",
+            name: "asteroid_small_3",
             position: (240, 186, 22, 24),
         ),
         Sprite(
-            name: "asteroid_small_5",
+            name: "asteroid_small_4",
             position: (270, 133, 29, 24),
         ),
         Sprite(

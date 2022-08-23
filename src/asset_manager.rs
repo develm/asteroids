@@ -22,7 +22,7 @@ struct SpriteSheet {
 
 impl SpriteSheet {
     fn load() -> Self {
-        let file = File::open("assets/atlas.ron").expect("Failed to open atlas.ron file");
+        let file = File::open("assets/atlas.ron").expect("Failed to open file: atlas.ron");
         from_reader(file).expect("Could not deserialize atlas.ron")
     }
 }
@@ -53,6 +53,10 @@ impl AssetManagerPlugin {
         asset_server: Res<AssetServer>,
         mut texture_atlases: ResMut<Assets<TextureAtlas>>,
     ) {
+        // Load asteroids.ron
+        commands.insert_resource(AsteroidManager::load_resource());
+
+        // Load AtlasManager
         let sprite_sheet = SpriteSheet::load();
         let texture_handle = asset_server.load("atlas.png");
 
