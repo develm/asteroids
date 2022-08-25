@@ -1,5 +1,5 @@
 use std::fs::File;
-use rand::prelude::{IteratorRandom, SliceRandom, ThreadRng};
+use rand::prelude::{IteratorRandom, ThreadRng};
 use rand::Rng;
 use ron::de::from_reader;
 use crate::prelude::*;

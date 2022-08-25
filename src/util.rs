@@ -1,5 +1,3 @@
-use bevy::sprite::Rect;
-
 use crate::prelude::*;
 
 pub fn out_of_bounds(cord: Vec3, bound_x: f32, bound_y: f32, slack: f32) -> bool {
