@@ -1,5 +1,26 @@
+use bevy::sprite::Rect;
+use bevy::utils::HashMap;
 use crate::laser::Laser;
 use crate::prelude::*;
+
+pub struct GameSystems;
+
+impl Plugin for GameSystems {
+    fn build(&self, app: &mut App) {
+        app
+            .add_event::<PlayerKilledEvent>()
+            .add_system(player_movement)
+            .add_system(wrap_window)
+            .add_system(expend)
+            .add_system(auto_move)
+            .add_system(player_action)
+            .add_system(destroy_asteroid)
+            .add_system(destroy_player)
+            .add_system(lives_manager)
+            .add_system(player_spawn_manager);
+    }
+}
+
 
 pub fn auto_move(
     time: Res<Time>,
@@ -135,7 +156,7 @@ pub fn destroy_player(
 }
 
 pub fn lives_manager(
-    mut player_query: Query<(&mut Player)>,
+    mut player_query: Query<&mut Player>,
     mut events: EventReader<PlayerKilledEvent>,
 ) {
     let mut player = match player_query.get_single_mut() {
@@ -146,5 +167,34 @@ pub fn lives_manager(
     for _ in events.iter() {
         player.loose_life();
     }
+}
+
+pub fn player_spawn_manager(
+    atlas_manager: Res<AtlasManager>,
+    windows: ResMut<Windows>,
+    atlases: ResMut<Assets<TextureAtlas>>,
+    mut events: EventReader<PlayerKilledEvent>,
+    mut player_query: Query<&mut Transform, With<Player>>,
+    asteroid_query: Query<(&Asteroid, &TextureAtlasSprite, &Transform), Without<Player>>,
+) {
+    if events.is_empty() {
+        return;
+    }
+    let mut player_position = match player_query.get_single_mut() {
+        Ok(q) => q,
+        Err(_) => return
+    };
+    let atlas = atlases.get(&atlas_manager.texture_atlas).expect("Texture atlas not found");
+    let mut asteroid_positions: Vec<(Vec3, Rect)> = Vec::new();
+    for (_, sprite, a_position) in asteroid_query.iter() {
+        let size: &Rect = atlas.textures.get(sprite.index).expect("Texture size not found");
+        asteroid_positions.push((a_position.translation, *size));
+    }
+
+    let window = windows.get_primary().expect("Could not load window information");
+    let mut rng = rand::thread_rng();
+    player_position.translation = random_position(&mut rng, Vec2::new(window.width(), window.height()), &asteroid_positions);
+
+
 }
 

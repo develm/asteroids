@@ -1,6 +1,7 @@
 use bevy::window::PresentMode;
 
 use prelude::*;
+use crate::game_systems::GameSystems;
 
 mod asset_manager;
 mod components;
@@ -33,15 +34,7 @@ fn main() {
         .add_plugins(DefaultPlugins)
         .add_plugin(AssetManagerPlugin)
         .add_startup_system(load_game)
-        .add_event::<PlayerKilledEvent>()
-        .add_system(game_systems::player_movement)
-        .add_system(game_systems::wrap_window)
-        .add_system(game_systems::expend)
-        .add_system(game_systems::auto_move)
-        .add_system(game_systems::player_action)
-        .add_system(game_systems::destroy_asteroid)
-        .add_system(game_systems::destroy_player)
-        .add_system(game_systems::lives_manager)
+        .add_plugin(GameSystems)
         .run();
 }
 
