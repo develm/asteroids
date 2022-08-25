@@ -115,22 +115,36 @@ pub fn destroy_asteroid(
 }
 
 pub fn destroy_player(
-    mut commands: Commands,
     atlas_manager: Res<AtlasManager>,
     atlases: ResMut<Assets<TextureAtlas>>,
-    player: Query<(Entity, &Transform), With<Player>>,
+    mut ev_player: EventWriter<PlayerKilledEvent>,
+    player: Query<&Transform, With<Player>>,
     asteroids: Query<(&TextureAtlasSprite, &Transform), With<Asteroid>>,
 ) {
-    let (pe, player) = match player.get_single() {
+    let  p_position = match player.get_single() {
         Ok(q) => q,
         Err(_) => return
     };
     let atlas = atlases.get(&atlas_manager.texture_atlas).expect("Texture atlas not found");
     for (sprite, asteroid) in asteroids.iter() {
         let size = atlas.textures.get(sprite.index).expect("Texture size not found");
-        if in_bounds(player.translation, asteroid.translation, size.width(), size.height()) {
-            commands.entity(pe).despawn();
-            Player::spawn(&mut commands, &atlas_manager, Vec3::ZERO);
+        if in_bounds(p_position.translation, asteroid.translation, size.width(), size.height()) {
+            ev_player.send(PlayerKilledEvent);
         }
     }
 }
+
+pub fn lives_manager(
+    mut player_query: Query<(&mut Player)>,
+    mut events: EventReader<PlayerKilledEvent>,
+) {
+    let mut player = match player_query.get_single_mut() {
+        Ok(q) => q,
+        Err(_) => return
+    };
+
+    for _ in events.iter() {
+        player.loose_life();
+    }
+}
+

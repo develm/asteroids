@@ -33,6 +33,7 @@ fn main() {
         .add_plugins(DefaultPlugins)
         .add_plugin(AssetManagerPlugin)
         .add_startup_system(load_game)
+        .add_event::<PlayerKilledEvent>()
         .add_system(game_systems::player_movement)
         .add_system(game_systems::wrap_window)
         .add_system(game_systems::expend)
@@ -40,6 +41,7 @@ fn main() {
         .add_system(game_systems::player_action)
         .add_system(game_systems::destroy_asteroid)
         .add_system(game_systems::destroy_player)
+        .add_system(game_systems::lives_manager)
         .run();
 }
 

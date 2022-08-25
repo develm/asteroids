@@ -1,8 +1,11 @@
 use crate::prelude::*;
 
+pub struct PlayerKilledEvent;
+
 #[derive(Component)]
 pub struct Player {
     fire_rate: f32,
+    lives: i32,
 }
 
 impl Player {
@@ -20,13 +23,19 @@ impl Player {
                     ..Default::default()
                 })
             .insert(Player {
-                fire_rate: 10.0
+                fire_rate: 10.0,
+                lives: 3,
             })
             .insert(Wrappable)
             .insert(Movement {
                 movement_speed: 300.0,
                 rotation_speed: f32::to_radians(180.0),
             });
+    }
+
+    pub fn loose_life(&mut self) {
+        self.lives -= 1;
+        self.lives = self.lives.max(0);
     }
 
     pub fn fire_rate(&self) -> f32 {
