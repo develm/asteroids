@@ -56,7 +56,7 @@ pub fn player_movement(
 
     transform.rotate_z(rotation_factor * movement.rotation_speed * time.delta_seconds());
 
-    let direction = transform.rotation * -Vec3::X;
+    let direction = transform.rotation * Vec3::Y;
     let distance = movement_factor * movement.movement_speed * time.delta_seconds();
     let translation_delta = direction * distance;
     transform.translation += translation_delta;
@@ -76,7 +76,7 @@ pub fn player_action(
     };
     *elapsed += time.delta_seconds();
     if key.just_pressed(KeyCode::Space) && *elapsed > player.fire_rate() {
-        let direction = position.rotation * -Vec3::X;
+        let direction = position.rotation * Vec3::Y;
         let position = position.translation + (Vec3::new(20.0, 20.0, -1.0) * direction);
         Laser::spawn(&mut commands, atlas_manager, position, direction);
         *elapsed = 0.0;
