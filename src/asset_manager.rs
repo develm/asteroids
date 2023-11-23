@@ -35,7 +35,7 @@ pub struct AtlasManager {
 
 impl AtlasManager {
     pub fn find_index(&self, key: &str) -> usize {
-        *self.texture_index.get(key).expect("Could not find texture index")
+        *self.texture_index.get(key).expect(&format!("Could not find texture index: {}", key))
     }
 }
 

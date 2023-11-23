@@ -24,8 +24,8 @@ impl Asteroid {
             .insert_bundle(
                 SpriteSheetBundle {
                     texture_atlas: atlas_manager.texture_atlas.clone(),
-                    transform: Transform::from_translation(spawn_point).with_scale(Vec3::splat(1.5)),
-                    sprite: TextureAtlasSprite::new(atlas_manager.find_index("asteroid_large")),
+                    transform: Transform::from_translation(spawn_point),
+                    sprite: TextureAtlasSprite::new(atlas_manager.find_index("meteor_detailedLarge")),
                     ..Default::default()
                 }
             )

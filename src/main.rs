@@ -17,8 +17,6 @@ mod prelude {
     pub use crate::components::*;
     pub use crate::player::*;
     pub use crate::util::*;
-
-    pub const ASSET_SCALING: Vec3 = Vec3::splat(0.5);
 }
 
 fn main() {

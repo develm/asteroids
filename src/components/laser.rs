@@ -15,8 +15,8 @@ impl Laser {
             .insert_bundle(
                 SpriteSheetBundle {
                     texture_atlas: atlas_manager.texture_atlas.clone(),
-                    transform: Transform::from_translation(spawn_point).with_scale(ASSET_SCALING),
-                    sprite: TextureAtlasSprite::new(atlas_manager.find_index("power_green")),
+                    transform: Transform::from_translation(spawn_point),
+                    sprite: TextureAtlasSprite::new(atlas_manager.find_index("star_small")),
                     ..Default::default()
                 }
             )

@@ -18,8 +18,8 @@ impl Player {
             .insert_bundle(
                 SpriteSheetBundle {
                     texture_atlas: atlas_manager.texture_atlas.clone(),
-                    transform: Transform::from_translation(spawn_point).with_scale(ASSET_SCALING),
-                    sprite: TextureAtlasSprite::new(atlas_manager.find_index("spaceship")),
+                    transform: Transform::from_translation(spawn_point),
+                    sprite: TextureAtlasSprite::new(atlas_manager.find_index("ship_H")),
                     ..Default::default()
                 })
             .insert(Player {

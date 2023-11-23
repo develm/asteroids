@@ -3,21 +3,19 @@ AsteroidManager(
         AsteroidResource(
             size: 2,
             sprites: [
-                "asteroid_half_1",
-                "asteroid_half_2",
-                "asteroid_half_3",
-                "asteroid_half_4",
-                "asteroid_half_5",
-                "asteroid_half_6",
+                "meteor_detailedLarge",
+                "meteor_large",
+                "meteor_squareDetailedLarge",
+                "meteor_squareLarge",
             ],
         ),
         AsteroidResource (
             size: 1,
             sprites: [
-                "asteroid_small_1",
-                "asteroid_small_2",
-                "asteroid_small_3",
-                "asteroid_small_4",
+                "meteor_detailedSmall",
+                "meteor_small",
+                "meteor_squareDetailedSmall",
+                "meteor_squareSmall",
             ],
         )
     ]

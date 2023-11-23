@@ -1,106 +1,174 @@
 SpriteSheet(
-    width: 300.0,
-    height: 220.0,
+    width: 1024.0,
+    height: 512.0,
     sprites: [
         Sprite(
-            name: "asteroid_large",
-            position: (0, 0, 117, 123),
+            name: "station_C",
+            position: (0, 64, 120, 120),
+            ),
+        Sprite(
+            name: "station_B",
+            position: (0, 184, 112, 112),
         ),
         Sprite(
-            name: "asteroid_half_1",
-            position: (0, 133, 38, 72),
+            name: "enemy_C",
+            position: (0, 0, 128, 64),
         ),
         Sprite(
-            name: "asteroid_half_2",
-            position: (106, 133, 34, 63),
+            name: "star_medium",
+            position: (224, 0, 96, 96),
         ),
         Sprite(
-            name: "asteroid_half_3",
-            position: (141, 133, 55, 48),
+            name: "ship_sidesD",
+            position: (128, 0, 96, 64),
         ),
         Sprite(
-            name: "asteroid_half_4",
-            position: (203, 81, 39, 49),
+            name: "meteor_squareSmall",
+            position: (216, 192, 64, 64),
         ),
         Sprite(
-            name: "asteroid_half_5",
-            position: (197, 133, 42, 47),
+            name: "meteor_large",
+            position: (416, 0, 96, 96),
         ),
         Sprite(
-            name: "asteroid_half_6",
-            position: (243, 81, 36, 35),
+            name: "enemy_A",
+            position: (400, 256, 96, 96),
         ),
         Sprite(
-            name: "asteroid_small_1",
-            position: (168, 82, 28, 39),
+            name: "ship_C",
+            position: (400, 192, 96, 64),
         ),
         Sprite(
-            name: "asteroid_small_2",
-            position: (240, 160, 22, 25),
+            name: "meteor_squareLarge",
+            position: (304, 192, 96, 96),
         ),
         Sprite(
-            name: "asteroid_small_3",
-            position: (240, 186, 22, 24),
+            name: "ship_H",
+            position: (304, 288, 96, 96),
         ),
         Sprite(
-            name: "asteroid_small_4",
-            position: (270, 133, 29, 24),
+            name: "ship_G",
+            position: (304, 384, 96, 96),
         ),
         Sprite(
-            name: "explosion",
-            position: (118, 0, 84, 81),
+            name: "meteor_squareDetailedLarge",
+            position: (592, 192, 96, 96),
         ),
         Sprite(
-            name: "station",
-            position: (203, 0, 76, 80),
+            name: "meteor_squareDetailedSmall",
+            position: (736, 96, 64, 64),
         ),
         Sprite(
-            name: "spaceship",
-            position: (39, 133, 66, 71),
+            name: "satellite_D",
+            position: (0, 296, 104, 72),
         ),
         Sprite(
-            name: "circle",
-            position: (118, 82, 49, 49),
+            name: "meteor_small",
+            position: (400, 448, 64, 64),
         ),
         Sprite(
-            name: "boost",
-            position: (141, 182, 53, 30),
+            name: "ship_D",
+            position: (208, 448, 96, 64),
         ),
         Sprite(
-            name: "star_green",
-            position: (197, 181, 30, 29),
+            name: "satellite_A",
+            position: (104, 296, 104, 88),
         ),
         Sprite(
-            name: "star_purple",
-            position: (240, 133, 29, 26),
+            name: "star_large",
+            position: (208, 256, 96, 96),
         ),
         Sprite(
-            name: "gold_nugget_1",
-            position: (270, 158, 18, 18),
+            name: "ship_J",
+            position: (224, 96, 96, 96),
         ),
         Sprite(
-            name: "gold_nugget_2",
-            position: (106, 197, 16, 17),
+            name: "star_small",
+            position: (528, 480, 32, 32),
         ),
         Sprite(
-            name: "power_green",
-            position: (228, 181, 11, 13),
+            name: "star_tiny",
+            position: (496, 480, 32, 32),
         ),
         Sprite(
-            name: "power_purple",
-            position: (228, 195, 11, 13),
+            name: "icon_exclamationSmall",
+            position: (608, 127, 64, 64),
         ),
         Sprite(
-            name: "smoke_1",
-            position: (264, 178, 16, 15),
+            name: "icon_yellow",
+            position: (608, 0, 64, 127),
         ),
         Sprite(
-            name: "smoke_2",
-            position: (285, 178, 14, 15),
+            name: "icon_plusSmall",
+            position: (672, 96, 64, 64),
         ),
         Sprite(
-            name: "smoke_3",
-            position: (273, 196, 19, 16),
+            name: "icon_crossSmall",
+            position: (676, 384, 64, 64),
+        ),
+        Sprite(
+            name: "ship_A",
+            position: (676, 448, 64, 48),
+        ),
+        Sprite(
+            name: "ship_I",
+            position: (672, 0, 64, 96),
+        ),
+        Sprite(
+            name: "icon_purple",
+            position: (688, 160, 64, 127),
+        ),
+        Sprite(
+            name: "meteor_detailedSmall",
+            position: (688, 287, 64, 64),
+        ),
+        Sprite(
+            name: "ship_L",
+            position: (208, 352, 96, 96),
+        ),
+        Sprite(
+            name: "meteor_detailedLarge",
+            position: (592, 288, 96, 96),
+        ),
+        Sprite(
+            name: "effect_yellow",
+            position: (608, 0, 64, 127),
+        ),
+        Sprite(
+            name: "icon_crossLarge",
+            position: (496, 288, 96, 96),
+        ),
+        Sprite(
+            name: "icon_plusLarge",
+            position: (496, 384, 96, 96),
+        ),
+        Sprite(
+            name: "icon_exclamationLarge",
+            position: (512, 96, 96, 96),
+        ),
+        Sprite(
+            name: "ship_B",
+            position: (464, 448, 32, 64),
+        ),
+        Sprite(
+            name: "ship_K",
+            position: (736, 0, 64, 96),
+        ),
+        Sprite(
+            name: "ship_sidesA",
+            position: (592, 384, 84, 106),
+        ),
+        Sprite(
+            name: "ship_sidesB",
+            position: (120, 64, 104, 104),
+        ),
+        Sprite(
+            name: "ship_sidesC",
+            position: (104, 384, 104, 104),
+        ),
+        Sprite(
+            name: "ship_sidesD",
+            position: (128, 0, 96, 64),
         ),
     ]
 )

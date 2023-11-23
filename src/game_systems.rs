@@ -1,5 +1,4 @@
 use bevy::sprite::Rect;
-use bevy::utils::HashMap;
 use crate::laser::Laser;
 use crate::prelude::*;
 
@@ -173,7 +172,7 @@ pub fn player_spawn_manager(
     atlas_manager: Res<AtlasManager>,
     windows: ResMut<Windows>,
     atlases: ResMut<Assets<TextureAtlas>>,
-    mut events: EventReader<PlayerKilledEvent>,
+    events: EventReader<PlayerKilledEvent>,
     mut player_query: Query<&mut Transform, With<Player>>,
     asteroid_query: Query<(&Asteroid, &TextureAtlasSprite, &Transform), Without<Player>>,
 ) {
